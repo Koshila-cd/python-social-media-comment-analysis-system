@@ -5,11 +5,8 @@ from langdetect import detect
 import sys
 from nltk.corpus import stopwords
 
-text_nouns = []
-
 
 def extract_nouns(text):
-    sentences = []
 
     # language detection
     if detect(text) == 'en':
@@ -49,13 +46,13 @@ def extract_nouns(text):
     pos_tagged_words = nltk.pos_tag(lemmatized_words)
     print("POS Tagged words:", pos_tagged_words)
 
+    text_nouns = []
     for w in pos_tagged_words:
         if w[1] == 'NN' or w[1] == 'NNS' or w[1] == 'NNP' or w[1] == 'NNPS':
             print(w)
             text_nouns.append(w)
 
     return text_nouns
-
 
 if __name__ == '__main__':
     text = "This movie is awesome. But I don't like the last part"
