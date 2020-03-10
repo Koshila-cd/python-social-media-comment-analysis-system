@@ -1,4 +1,7 @@
 import noun_extraction
+from owlready2 import *
+
+onto = get_ontology("movie.owl").load()
 
 youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
                      " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
@@ -17,11 +20,23 @@ comment = "This movie is awesome. But I don't like the last part"
 
 
 def youtube_nouns():
-    return noun_extraction.extract_nouns(youTubeDescription)
+    nouns = noun_extraction.extract_nouns(youTubeDescription)
+    # Add the nouns extracted from the description into the Ontology
+    # for n in nouns:
+        # onto.MovieKeywords(n[0])
+    # onto.save(file="movie.owl", format="rdfxml")
+    return nouns
 
-
+star = "*"
 def comment_nouns():
-    return noun_extraction.extract_nouns(comment)
+    nouns = noun_extraction.extract_nouns(comment)
+    for n in nouns:
+        print(n[0])
+        iri1 = star + n[0] + star
+        # Direct mapping with ontology created for searching for nouns extracted from the YouTube comment
+        if onto.search(iri = iri1):
+            print("relevant")
+    return nouns
 
 
 if __name__ == '__main__':
