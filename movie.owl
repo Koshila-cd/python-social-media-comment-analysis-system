@@ -2569,10 +2569,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieNames>
 
-<MovieNames rdf:about="#Switching Channels">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieNames>
-
 <MovieNames rdf:about="#Chocolat">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieNames>
@@ -29848,10 +29844,6 @@
 </MovieKeywords>
 
 <MovieKeywords rdf:about="#create">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#channel">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
