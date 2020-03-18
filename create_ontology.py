@@ -3,6 +3,7 @@ import pandas as pd
 import noun_extraction
 
 onto = get_ontology("/data")
+# onto = get_ontology("movie.owl").load()
 mg = pd.read_csv('data/Movie-genres.csv', index_col=0)
 mn = pd.read_csv('data/Movie-names.csv', index_col=0)
 ms = pd.read_csv('data/Movie-stars.csv', index_col=0)
@@ -10,6 +11,8 @@ md = pd.read_csv('data/Movie-directors.csv', index_col=0)
 mr = pd.read_csv('data/Movie-reviews.csv', index_col=0)
 msn = pd.read_csv('data/Movie-stage-names.csv', index_col=0)
 ma = pd.read_csv('data/Movie-awards.csv', index_col=0)
+mswr = pd.read_csv('data/Movie-single-word-reviews.csv', index_col=0)
+
 
 # Movie Names
 class MovieNames(Thing):
@@ -17,7 +20,7 @@ class MovieNames(Thing):
 
 
 for label, row in mn.iterrows():
-    MovieNames(label)
+    MovieNames(label.casefold())
 
 
 # Movie Keywords
@@ -28,7 +31,7 @@ class MovieKeywords(Thing):
 for label, row in mr.iterrows():
     nouns = noun_extraction.extract_nouns(label)
     for n in nouns:
-        MovieKeywords(n[0])
+        MovieKeywords(n[0].casefold())
 
 
 # Movie Awards
@@ -37,7 +40,7 @@ class MovieAwards(Thing):
 
 
 for label, row in ma.iterrows():
-    MovieAwards(label)
+    MovieAwards(label.casefold())
 
 
 # Movie Stars
@@ -46,7 +49,7 @@ class MovieStars(Thing):
 
 
 for label, row in ms.iterrows():
-    MovieStars(label)
+    MovieStars(label.casefold())
 
 
 # Movie Directors
@@ -55,7 +58,7 @@ class MovieDirectors(Thing):
 
 
 for label, row in md.iterrows():
-    MovieDirectors(label)
+    MovieDirectors(label.casefold())
 
 
 # Movie Genres
@@ -64,7 +67,7 @@ class MovieGenres(Thing):
 
 
 for label, row in mg.iterrows():
-    MovieGenres(label)
+    MovieGenres(label.casefold())
 
 
 # Movie Character Names
@@ -78,7 +81,16 @@ class MovieStageNames(Thing):
 
 
 for label, row in msn.iterrows():
-    MovieStageNames(label)
+    MovieStageNames(label.casefold())
+
+
+#Movie single word reviews
+class MovieSingleWordReviews(Thing):
+    namespace = onto
+
+
+for label, row in mswr.iterrows():
+    onto.MovieKeywords(label.casefold())
 
 # onto.save(file="movie.owl", format="rdfxml")
 
