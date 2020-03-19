@@ -7,7 +7,6 @@ from nltk.corpus import stopwords
 
 
 def extract_nouns(text):
-
     # language detection
     # if detect(text) == 'en':
     sentences = sent_tokenize(text)
@@ -54,6 +53,7 @@ def extract_nouns(text):
             text_nouns.append(w)
 
     return text_nouns
+
 
 if __name__ == '__main__':
     # text = "This movie is awesome. But I don't like the last part"

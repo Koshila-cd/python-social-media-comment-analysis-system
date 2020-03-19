@@ -1,12 +1,12 @@
-import service
+import main
 from nltk.corpus import movie_reviews
 
 
 description_nouns = []
 comment_nouns = []
 
-description_nouns = service.youtube_nouns()
-comment_nouns = service.comment_nouns()
+description_nouns = main.youtube_nouns()
+comment_nouns = main.comment_nouns()
 
 
 if __name__ == '__main__':
