@@ -20,8 +20,9 @@ youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Sha
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 
-@app.route('/sentiment-score', methods=['GET'])
+@app.route('/sentiment', methods=['GET'])
 def home():
     return main.toService()
+
 
 app.run()
