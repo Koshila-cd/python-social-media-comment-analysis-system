@@ -1,5 +1,6 @@
 import main
 import flask
+from flask import request
 
 comment = "This Movie is awesome. But I don't like the last part"
 
@@ -16,13 +17,20 @@ youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Sha
                      "https://twitter.com/disneyzootopia Follow @DisneyAnimation on Instagram - https://twitter.com/disneyanimation Follow " \
                      "Disney Animation on Tumblr - http://disneyanimation.tumblr.com/ Category Film & Animation"
 
-
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 
-@app.route('/sentiment', methods=['GET'])
-def home():
-    return main.toService()
+
+# @app.route('/sentiment', methods=['GET'])
+# def home():
+#     return main.toService()
+
+
+@app.route('/data', methods=['POST'])
+def find_data():
+    comment1 = request.json['comment']
+    description = request.json['description']
+    return main.toService(comment1, description)
 
 
 app.run()

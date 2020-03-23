@@ -5,27 +5,29 @@ import sentiment_analysis
 
 onto = get_ontology("movie.owl").load()
 
-youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
-                     " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
-                     "like no other. Comprised of habitat neighborhoods like ritzy Sahara Square and frigid Tundratown, it’s a melting" \
-                     " pot where animals from every environment live together—a place where no matter what you are, from the biggest " \
-                     "elephant to the smallest shrew, you can be anything. But when rookie Officer Judy Hopps (voice of Ginnifer Goodwin)" \
-                     " arrives, she discovers that being the first bunny on a police force of big, tough animals isn’t so easy. Determined" \
-                     " to prove herself, she jumps at the opportunity to crack a case, even if it means partnering with a fast-talking," \
-                     " scam-artist fox, Nick Wilde (voice of Jason Bateman), to solve the mystery. Walt Disney Animation Studios’ “Zootopia,”" \
-                     " a comedy-adventure directed by Byron Howard and Rich Moore and co-directed by Jared Bush, opens in theaters on March 4," \
-                     " 2016. Like Zootopia on Facebook - https://www.facebook.com/DisneyZootopia Follow @DisneyZootopia on Twitter - " \
-                     "https://twitter.com/disneyzootopia Follow @DisneyAnimation on Instagram - https://twitter.com/disneyanimation Follow " \
-                     "Disney Animation on Tumblr - http://disneyanimation.tumblr.com/ Category Film & Animation"
-
-comment = "This Movie is awesome. But I don't like the last part"
+# youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
+#                      " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
+#                      "like no other. Comprised of habitat neighborhoods like ritzy Sahara Square and frigid Tundratown, it’s a melting" \
+#                      " pot where animals from every environment live together—a place where no matter what you are, from the biggest " \
+#                      "elephant to the smallest shrew, you can be anything. But when rookie Officer Judy Hopps (voice of Ginnifer Goodwin)" \
+#                      " arrives, she discovers that being the first bunny on a police force of big, tough animals isn’t so easy. Determined" \
+#                      " to prove herself, she jumps at the opportunity to crack a case, even if it means partnering with a fast-talking," \
+#                      " scam-artist fox, Nick Wilde (voice of Jason Bateman), to solve the mystery. Walt Disney Animation Studios’ “Zootopia,”" \
+#                      " a comedy-adventure directed by Byron Howard and Rich Moore and co-directed by Jared Bush, opens in theaters on March 4," \
+#                      " 2016. Like Zootopia on Facebook - https://www.facebook.com/DisneyZootopia Follow @DisneyZootopia on Twitter - " \
+#                      "https://twitter.com/disneyzootopia Follow @DisneyAnimation on Instagram - https://twitter.com/disneyanimation Follow " \
+#                      "Disney Animation on Tumblr - http://disneyanimation.tumblr.com/ Category Film & Animation"
+#
+# comment = "This Movie is awesome. But I don't like the last part"
 # comment = "no no no no"
 
 star = "*"
 
 
-def youtube_nouns():
-    nouns = noun_extraction.extract_nouns(youTubeDescription)
+def youtube_nouns(description):
+    print("youtube_nouns")
+    print(description)
+    nouns = noun_extraction.extract_nouns(description)
     # Add the nouns extracted from the description into the Ontology
     for n in nouns:
         # onto.MovieKeywords(n[0])
@@ -33,12 +35,13 @@ def youtube_nouns():
         return nouns
 
 
-def comment_nouns():  # words with missed spellings
+def comment_nouns(comment):  # words with missed spellings
     print("comment_nouns")
+    print(comment)
     noOfWords = len(comment.split())
     mapped = []
     nouns = noun_extraction.extract_nouns(comment)
-    print(nouns)
+    # print(nouns)
     if noOfWords == 1:
         word = comment.split()
         word1 = star + word[0] + star
@@ -73,22 +76,23 @@ def semantic_mapping(word, mapped):
     for synonym in set(synonyms):
         if onto.search(iri=synonym):
             mapped.append(synonym)
-            print("semantic map: ", comment)
+            # print("semantic map: ", comment)
     # print("mapped: ", mapped)
     return mapped
 
 
 def relevance_check(map):
     if len(map[0]) > 0:
-        print("relevant")
+        # print("relevant")
         polarity = sentiment_analysis.analyze_sentiment(map[2])
     else:
         polarity = "None"
     return polarity
 
-def toService():
-    youtube_nouns()
-    map = comment_nouns()
+
+def toService(comment, description):
+    youtube_nouns(description)
+    map = comment_nouns(comment)
     polarity = relevance_check(map)
     return polarity
 
@@ -96,4 +100,4 @@ def toService():
 if __name__ == '__main__':
     youtube_nouns()
     map = comment_nouns()
-    print("polarity: ", relevance_check(map))
+    # print("polarity: ", relevance_check(map))
