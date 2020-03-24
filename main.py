@@ -23,7 +23,6 @@ onto = get_ontology("movie.owl").load()
 
 star = "*"
 
-
 def youtube_nouns(description):
     print("youtube_nouns")
     print(description)
@@ -94,7 +93,8 @@ def toService(comment, description):
     youtube_nouns(description)
     map = comment_nouns(comment)
     polarity = relevance_check(map)
-    return polarity
+    category = sentiment_analysis.sentiment_category(polarity)
+    return category
 
 
 if __name__ == '__main__':

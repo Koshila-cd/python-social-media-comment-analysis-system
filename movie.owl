@@ -31352,10 +31352,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="#@">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="#harrystyles">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
@@ -31372,19 +31368,11 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="#itðÿ˜‚ðÿ˜‚ðÿ˜‚">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="#concentrate">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
 <MovieKeywords rdf:about="#dumbasses">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#us">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
