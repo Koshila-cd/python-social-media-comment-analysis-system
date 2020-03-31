@@ -2,10 +2,11 @@ from textblob import TextBlob
 
 
 def analyze_sentiment(comment):
-
     blob1 = TextBlob(comment)
-    polarity = blob1.sentiment.polarity
-
+    p = blob1.sentiment.polarity
+    print("score: ", p)
+    polarity = sentiment_category(p)
+    print("category: ", polarity)
     return polarity
 
 
@@ -18,3 +19,8 @@ def sentiment_category(score):
         category = 'n'
 
     return category
+
+
+if __name__ == '__main__':
+    comment = "fabulous....."
+    analyze_sentiment(comment)

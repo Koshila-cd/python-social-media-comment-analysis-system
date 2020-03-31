@@ -8,11 +8,9 @@ from nltk.corpus import stopwords
 
 def extract_nouns(text):
     # language detection
-    # if detect(text) == 'en':
+    # lang = detect(text)
+    # if lang == 'en':
     sentences = sent_tokenize(text)
-    # else:
-    #     print("The language is, ", detect(text))
-    #     sys.exit(1)
 
     # tokenize comment
     tokens = []
@@ -41,21 +39,33 @@ def extract_nouns(text):
     # print("Filterd Sentence:", filtered_comment)
     # print("Lemmatized Sentence:", lemmatized_words)
 
+    # select only letters from alphabet
+    remove_punc = []
+    for l in lemmatized_words:
+        if l.isalpha():
+            remove_punc.append(l)
+
     # POS tagging
-    pos_tagged_words = nltk.pos_tag(lemmatized_words)
+    pos_tagged_words = nltk.pos_tag(remove_punc)
     # print("POS Tagged words:", pos_tagged_words)
 
     text_nouns = []
     for w in pos_tagged_words:
         if w[1] == 'NN' or w[1] == 'NNS' or w[1] == 'NNP':
             # or w[1] == 'NNP' or w[1] == 'NNPS'
-            # print(w)
+            print(w)
             text_nouns.append(w)
 
     return text_nouns
 
 
+# else:
+#     print("The language is, ", detect(text))
+#     sys.exit(1)
+#     return ""
+
+
 if __name__ == '__main__':
-    # text = "This movie is awesome. But I don't like the last part"
-    text = "OMG Love"
+    text = "This movie is awesome. But I don't like the last part!!!"
+    # text = "Меня зовут кошила"
     extract_nouns(text)

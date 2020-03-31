@@ -26278,6 +26278,7 @@
 
 <MovieNames rdf:about="#zootopia">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#MovieKeywords"/>
 </MovieNames>
 
 <MovieNames rdf:about="#allied">
@@ -27054,10 +27055,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="#end">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="#netflix">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
@@ -27066,35 +27063,11 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="#well">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#guess">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#anything">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="#😭😭">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
 <MovieKeywords rdf:about="#heart">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#way">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#tonight">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#seems">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
@@ -27114,27 +27087,7 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="#house">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#carpet">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#door">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#photos">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="#film">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#..i">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
@@ -27179,10 +27132,6 @@
 </MovieKeywords>
 
 <MovieKeywords rdf:about="#sjws">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="#’">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
@@ -59114,6 +59063,7 @@
 
 <MovieStars rdf:about="#jason bateman">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#MovieKeywords"/>
 </MovieStars>
 
 <MovieStars rdf:about="#jason beghe">
@@ -100455,6 +100405,10 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
+<MovieKeywords rdf:about="#awesome">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
 <MovieKeywords rdf:about="#friendship">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
@@ -100664,6 +100618,54 @@
 </MovieKeywords>
 
 <MovieKeywords rdf:about="#Zoo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#shakira">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#mammal metropolis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#tundratown">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#rookie">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#judy hopps">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#ginnifer goodwin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#fox">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#nick wilde">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#byron howard">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#rich moore">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#jared bush">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#zoo">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
