@@ -1,8 +1,6 @@
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
-from langdetect import detect
-import sys
 from nltk.corpus import stopwords
 
 
@@ -28,16 +26,12 @@ def extract_nouns(text):
         for token in w:
             if token not in stop_words:
                 filtered_comment.append(token)
-    # print("Tokenized Sentence:", tokens)
 
     # word lemmatization
     lem = WordNetLemmatizer()
     lemmatized_words = []
     for com in filtered_comment:
         lemmatized_words.append(lem.lemmatize(com, "v"))
-
-    # print("Filterd Sentence:", filtered_comment)
-    # print("Lemmatized Sentence:", lemmatized_words)
 
     # select only letters from alphabet
     remove_punc = []
@@ -47,13 +41,10 @@ def extract_nouns(text):
 
     # POS tagging
     pos_tagged_words = nltk.pos_tag(remove_punc)
-    # print("POS Tagged words:", pos_tagged_words)
 
     text_nouns = []
     for w in pos_tagged_words:
         if w[1] == 'NN' or w[1] == 'NNS' or w[1] == 'NNP':
-            # or w[1] == 'NNP' or w[1] == 'NNPS'
-            print(w)
             text_nouns.append(w)
 
     return text_nouns

@@ -92,7 +92,7 @@ class MovieSingleWordReviews(Thing):
 for label, row in mswr.iterrows():
     onto.MovieKeywords(label.casefold())
 
-onto.save(file="movie.owl", format="rdfxml")
+# onto.save(file="movie.owl", format="rdfxml")
 
 # print(list(onto.classes()))
 # g = 0

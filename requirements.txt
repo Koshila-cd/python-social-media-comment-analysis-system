@@ -1,0 +1,6 @@
+flask
+spacy
+pandas
+owlready2
+textblob
+nltk
