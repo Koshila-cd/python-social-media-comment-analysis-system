@@ -104,7 +104,7 @@ def semantic_mapping(word, mapped):
 
 def relevance_check(map):
     if len(map[0]) > 0:
-        polarity = sentiment_analysis.analyze_sentiment(map[2])
+        polarity = sentiment_analysis.sentiment_analysis(map[2])
     else:
         polarity = "None"
     return polarity
@@ -134,9 +134,9 @@ if __name__ == '__main__':
     dner = named_entity_recognition.recognition(youTubeDescription)
     if len(dner) > 0:
         for n in dner:
-            print("dner")
-            # onto.MovieKeywords(n.casefold())
-            # onto.save(file="movie.owl", format="rdfxml")
+            # print("dner")
+            onto.MovieKeywords(n.casefold())
+            onto.save(file="movie.owl", format="rdfxml")
 
     youtube_nouns(youTubeDescription)
 

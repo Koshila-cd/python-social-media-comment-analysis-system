@@ -48,61 +48,61 @@ all_words_without_punctuation = [word for word in all_words if word not in strin
 # Let's name the new list as all_words_clean
 # because we clean stopwords and punctuations from the word list
 
-all_words_clean = []
-for word in all_words:
-    if word not in stopwords_english and word not in string.punctuation:
-        all_words_clean.append(word)
+# all_words_clean = []
+# for word in all_words:
+#     if word not in stopwords_english and word not in string.punctuation:
+#         all_words_clean.append(word)
+#
+# all_words_frequency = FreqDist(all_words_clean)
+#
+# # get 2000 frequently occuring words
+# most_common_words = all_words_frequency.most_common(2000)
+#
+# # the most common words list's elements are in the form of tuple
+# # get only the first element of each tuple of the word list
+# word_features = [item[0] for item in most_common_words]
 
-all_words_frequency = FreqDist(all_words_clean)
 
-# get 2000 frequently occuring words
-most_common_words = all_words_frequency.most_common(2000)
-
-# the most common words list's elements are in the form of tuple
-# get only the first element of each tuple of the word list
-word_features = [item[0] for item in most_common_words]
-
-
-def document_features(document):
-    # "set" function will remove repeated/duplicate tokens in the given list
-    document_words = set(document)
-    features = {}
-    for word in word_features:
-        features['contains(%s)' % word] = (word in document_words)
-    return features
+# def document_features(document):
+#     # "set" function will remove repeated/duplicate tokens in the given list
+#     document_words = set(document)
+#     features = {}
+#     for word in word_features:
+#         features['contains(%s)' % word] = (word in document_words)
+#     return features
 
 
 # get the first negative movie review file
-movie_review_file = movie_reviews.fileids('neg')[0]
-
-feature_set = [(document_features(doc), category) for (doc, category) in documents]
-
-test_set = feature_set[:400]
-train_set = feature_set[400:]
-classifier = NaiveBayesClassifier.train(train_set)
-
-accuracy = classify.accuracy(classifier, test_set)
-print(accuracy)  # Output: 0.77
-
-custom_review = "I hated the film. It was a disaster. Poor direction, bad acting."
-custom_review_tokens = word_tokenize(custom_review)
-custom_review_set = document_features(custom_review_tokens)
-print(classifier.classify(custom_review_set))  # Output: neg
+# movie_review_file = movie_reviews.fileids('neg')[0]
+#
+# feature_set = [(document_features(doc), category) for (doc, category) in documents]
+#
+# test_set = feature_set[:400]
+# train_set = feature_set[400:]
+# classifier = NaiveBayesClassifier.train(train_set)
+#
+# accuracy = classify.accuracy(classifier, test_set)
+# print(accuracy)  # Output: 0.77
+#
+# custom_review = "I hated the film. It was a disaster. Poor direction, bad acting."
+# custom_review_tokens = word_tokenize(custom_review)
+# custom_review_set = document_features(custom_review_tokens)
+# print(classifier.classify(custom_review_set))  # Output: neg
 # Negative review correctly classified as negative
 
 # probability result
-prob_result = classifier.prob_classify(custom_review_set)
-
-custom_review = "It was a wonderful and amazing movie. I loved it. Best direction, good acting."
-custom_review_tokens = word_tokenize(custom_review)
-custom_review_set = document_features(custom_review_tokens)
-
-print(classifier.classify(custom_review_set))  # Output: neg
+# prob_result = classifier.prob_classify(custom_review_set)
+#
+# custom_review = "It was a wonderful and amazing movie. I loved it. Best direction, good acting."
+# custom_review_tokens = word_tokenize(custom_review)
+# custom_review_set = document_features(custom_review_tokens)
+#
+# print(classifier.classify(custom_review_set))  # Output: neg
 # Positive review is classified as negative
 # We need to improve our feature set for more accurate prediction
 
 # probability result
-prob_result = classifier.prob_classify(custom_review_set)
+# prob_result = classifier.prob_classify(custom_review_set)
 
 # show 5 most informative features
 pos_reviews = []
@@ -152,27 +152,27 @@ shuffle(neg_reviews_set)
 test_set = pos_reviews_set[:200] + neg_reviews_set[:200]
 train_set = pos_reviews_set[200:] + neg_reviews_set[200:]
 
-classifier = NaiveBayesClassifier.train(train_set)
+# classifier = NaiveBayesClassifier.train(train_set)
 
-accuracy = classify.accuracy(classifier, test_set)
-
-custom_review = "I hated the film. It was a disaster. Poor direction, bad acting."
-custom_review_tokens = word_tokenize(custom_review)
-custom_review_set = bag_of_words(custom_review_tokens)
-print(classifier.classify(custom_review_set))  # Output: neg
+# accuracy = classify.accuracy(classifier, test_set)
+#
+# custom_review = "I hated the film. It was a disaster. Poor direction, bad acting."
+# custom_review_tokens = word_tokenize(custom_review)
+# custom_review_set = bag_of_words(custom_review_tokens)
+# print(classifier.classify(custom_review_set))  # Output: neg
 # Negative review correctly classified as negative
 
 # probability result
-prob_result = classifier.prob_classify(custom_review_set)
-
-custom_review = "It was a wonderful and amazing movie. I loved it. Best direction, good acting."
-custom_review_tokens = word_tokenize(custom_review)
-custom_review_set = bag_of_words(custom_review_tokens)
-print(classifier.classify(custom_review_set))
+# prob_result = classifier.prob_classify(custom_review_set)
+#
+# custom_review = "It was a wonderful and amazing movie. I loved it. Best direction, good acting."
+# custom_review_tokens = word_tokenize(custom_review)
+# custom_review_set = bag_of_words(custom_review_tokens)
+# print(classifier.classify(custom_review_set))
 # Positive review correctly classified as positive
 
 # probability result
-prob_result = classifier.prob_classify(custom_review_set)
+# prob_result = classifier.prob_classify(custom_review_set)
 
 stopwords_english = stopwords.words('english')
 
@@ -290,3 +290,9 @@ print(classifier.classify(custom_review_set))  # Output: pos
 
 # probability result
 prob_result = classifier.prob_classify(custom_review_set)
+
+custom_review = "I hate this movie"
+custom_review_tokens = word_tokenize(custom_review)
+custom_review_set = bag_of_all_words(custom_review_tokens)
+
+print("new comment sentiment : ", classifier.classify(custom_review_set))
