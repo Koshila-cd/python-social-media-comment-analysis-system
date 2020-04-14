@@ -4,6 +4,7 @@ from owlready2 import *
 from nltk.corpus import wordnet
 import sentiment_analysis
 import named_entity_recognition
+from textblob import TextBlob
 
 onto = get_ontology("movie.owl").load()
 
@@ -30,12 +31,13 @@ def youtube_nouns(description):
     nouns = noun_extraction.extract_nouns(description)
     # Add the nouns extracted from the description into the Ontology
     for n in nouns:
-        # onto.MovieKeywords(n[0].casefold())
-        # onto.save(file="movie.owl", format="rdfxml")
+        onto.MovieKeywords(n[0].casefold())
+        onto.save(file="movie.owl", format="rdfxml")
         return nouns
 
 
 def comment_nouns(comment):  # words with missed spellings
+    comment = TextBlob(comment).correct().__str__()
     noOfWords = []
     tokens = word_tokenize(comment)
     for t in tokens:
@@ -46,10 +48,7 @@ def comment_nouns(comment):  # words with missed spellings
 
     if len(noOfWords) == 1:
         word1 = star + noOfWords[0]
-        # print(word1)
-        print(noOfWords[0])
         if onto.search(iri=word1.casefold()):
-            print("mappedddddddd")
             mapped.append(noOfWords[0].casefold())
         else:
             # Semantic mapping
@@ -67,7 +66,7 @@ def comment_nouns(comment):  # words with missed spellings
                     mapped.__add__(noun_mapping(nouns, mapped))
         else:
             mapped.__add__(noun_mapping(nouns, mapped))
-    print("mappedmapped", mapped)
+    print("mappedmapped", mapped, nouns, comment)
     return mapped, nouns, comment
 
 
@@ -83,12 +82,11 @@ def noun_mapping(nouns, mapped):
             # Semantic mapping
             mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
 
-    print("mapped", mapped)
+    # print("mapped", mapped)
     return mapped
 
 
 def semantic_mapping(word, mapped):
-    print("dddaadasdadadad")
     synonyms = []
 
     # finding synonyms in wordnet
@@ -105,16 +103,15 @@ def semantic_mapping(word, mapped):
 
 
 def relevance_check(map):
-    print("map:", map)
     if len(map[0]) > 0:
-        print("relevant comment")
         polarity = sentiment_analysis.analyze_sentiment(map[2])
     else:
         polarity = "None"
     return polarity
 
 
-def toService(comment, description):
+def toService(comment, description, title):
+    onto.MovieNames(title)
     dner = named_entity_recognition.recognition(youTubeDescription)
     if len(dner) > 0:
         for n in dner:
@@ -123,7 +120,9 @@ def toService(comment, description):
 
     youtube_nouns(description)
 
-    map = comment_nouns(comment)
+    corrected = TextBlob(comment).correct().__str__()
+    print("corrected : ", corrected)
+    map = comment_nouns(corrected)
     polarity = relevance_check(map)
 
     return polarity
@@ -141,9 +140,11 @@ if __name__ == '__main__':
 
     youtube_nouns(youTubeDescription)
 
-    comment = "Z < br / > @Z"
+    comment = "I liove this monie"
     # Z < br / > @Z
-    map = comment_nouns(comment)
+    corrected = TextBlob(comment).correct().__str__()
+    # print("corrected : ", corrected)
+    map = comment_nouns(corrected)
     polarity = relevance_check(map)
-    print("polarity", polarity)
+    # print("polarity", polarity)
     ######################################################################

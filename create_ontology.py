@@ -2,7 +2,7 @@ from owlready2 import *
 import pandas as pd
 import noun_extraction
 
-onto = get_ontology("/data")
+ontology = get_ontology("/data")
 # onto = get_ontology("movie.owl").load()
 mg = pd.read_csv('data/Movie-genres.csv', index_col=0)
 mn = pd.read_csv('data/Movie-names.csv', index_col=0)
@@ -16,7 +16,7 @@ mswr = pd.read_csv('data/Movie-single-word-reviews.csv', index_col=0)
 
 # Movie Names
 class MovieNames(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in mn.iterrows():
@@ -25,7 +25,7 @@ for label, row in mn.iterrows():
 
 # Movie Keywords
 class MovieKeywords(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in mr.iterrows():
@@ -36,7 +36,7 @@ for label, row in mr.iterrows():
 
 # Movie Awards
 class MovieAwards(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in ma.iterrows():
@@ -45,7 +45,7 @@ for label, row in ma.iterrows():
 
 # Movie Stars
 class MovieStars(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in ms.iterrows():
@@ -54,7 +54,7 @@ for label, row in ms.iterrows():
 
 # Movie Directors
 class MovieDirectors(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in md.iterrows():
@@ -63,7 +63,7 @@ for label, row in md.iterrows():
 
 # Movie Genres
 class MovieGenres(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in mg.iterrows():
@@ -72,12 +72,12 @@ for label, row in mg.iterrows():
 
 # Movie Character Names
 class MovieCharacterNames(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 # Movie Stage Names
 class MovieStageNames(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in msn.iterrows():
@@ -86,11 +86,11 @@ for label, row in msn.iterrows():
 
 #Movie single word reviews
 class MovieSingleWordReviews(Thing):
-    namespace = onto
+    namespace = ontology
 
 
 for label, row in mswr.iterrows():
-    onto.MovieKeywords(label.casefold())
+    ontology.MovieKeywords(label.casefold())
 
 # onto.save(file="movie.owl", format="rdfxml")
 

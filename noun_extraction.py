@@ -2,12 +2,14 @@ import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords
-
+from textblob import TextBlob
 
 def extract_nouns(text):
     # language detection
     # lang = detect(text)
     # if lang == 'en':
+    text = TextBlob(text).correct().__str__()
+    print("text : ", text)
     sentences = sent_tokenize(text)
 
     # tokenize comment

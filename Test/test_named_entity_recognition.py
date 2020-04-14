@@ -1,10 +1,7 @@
-import main
-import flask
-from flask import request
+import unittest
+import named_entity_recognition
 
-comment = "This Movie is awesome. But I don't like the last part"
-
-youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
+text = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
                      " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
                      "like no other. Comprised of habitat neighborhoods like ritzy Sahara Square and frigid Tundratown, it’s a melting" \
                      " pot where animals from every environment live together—a place where no matter what you are, from the biggest " \
@@ -17,20 +14,16 @@ youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Sha
                      "https://twitter.com/disneyzootopia Follow @DisneyAnimation on Instagram - https://twitter.com/disneyanimation Follow " \
                      "Disney Animation on Tumblr - http://disneyanimation.tumblr.com/ Category Film & Animation"
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = False
+class TestStringMethods(unittest.TestCase):
 
-# @app.route('/sentiment', methods=['GET'])
-# def home():
-#     return main.toService()
-
-
-@app.route('/data', methods=['POST'])
-def find_data():
-    comment1 = request.json['comment']
-    description = request.json['description']
-    title = request.json['title']
-    return main.toService(comment1, description, title)
+    def test_ner(self):
+        ne = named_entity_recognition.recognition(text)
+        self.assertEqual(ne, ['zootopia', 'shakira', 'mammal metropolis',
+                                  'tundratown', 'rookie', 'judy hopps', 'ginnifer goodwin',
+                                  'fox', 'nick wilde', 'jason bateman', 'zootopia', 'byron howard',
+                                  'rich moore', 'jared bush', 'zootopia']
+)
 
 
-app.run()
+if __name__ == '__main__':
+    unittest.main()

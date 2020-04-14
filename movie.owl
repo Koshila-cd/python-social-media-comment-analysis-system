@@ -100017,5 +100017,29 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
+<MovieNames rdf:about="#Extraction">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieNames>
+
+<MovieNames rdf:about="#The Perfect Date">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieNames>
+
+<MovieKeywords rdf:about="#zoo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieKeywords rdf:about="#too">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
+<MovieNames rdf:about="#Captain America">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieNames>
+
+<MovieKeywords rdf:about="#avenge">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</MovieKeywords>
+
 
 </rdf:RDF>
