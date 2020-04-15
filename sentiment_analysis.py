@@ -15,25 +15,25 @@ nr = pd.read_csv('data/neg-reviews-youtube.csv', index_col=0)
 stopwords_english = stopwords.words('english')
 
 
-def analyze_sentiment(comment):
-    blob1 = TextBlob(comment)
-    p = blob1.sentiment.polarity
-    print("score: ", p)
-    polarity = sentiment_category(p)
-    print("category: ", polarity)
-    return polarity
-
-
-def sentiment_category(score):
-    category = 'x'
-    print("score", score)
-    if score > 0.0:
-        category = 'p'
-
-    if score < 0.0:
-        category = 'n'
-
-    return category
+# def analyze_sentiment(comment):
+#     blob1 = TextBlob(comment)
+#     p = blob1.sentiment.polarity
+#     print("score: ", p)
+#     polarity = sentiment_category(p)
+#     print("category: ", polarity)
+#     return polarity
+#
+#
+# def sentiment_category(score):
+#     category = 'x'
+#     print("score", score)
+#     if score > 0.0:
+#         category = 'p'
+#
+#     if score < 0.0:
+#         category = 'n'
+#
+#     return category
 
 
 # clean words, i.e. remove stopwords and punctuation
@@ -102,6 +102,7 @@ def sentiment_analysis(text):
         neg_reviews.append(words)
 
     for label, row in pr.iterrows():
+        print(label)
         tokens = noun_extraction.extract_nouns(label)
         for t in tokens:
             pos_reviews.append(t)
@@ -110,7 +111,7 @@ def sentiment_analysis(text):
         tokens = noun_extraction.extract_nouns(label)
         for t in tokens:
             neg_reviews.append(t)
-    # 0.7725 0.755
+    # 0.8325 0.755
     # before 0.7875 now 0.805
     # positive reviews feature set
     pos_reviews_set = []
@@ -137,7 +138,7 @@ def sentiment_analysis(text):
     classifier = NaiveBayesClassifier.train(train_set)
 
     accuracy = classify.accuracy(classifier, test_set)
-    print(accuracy)  # Output: 0.8025
+    print(accuracy)  # Output: 0.8325
 
     custom_review_tokens = word_tokenize(text)
     custom_review_set = bag_of_all_words(custom_review_tokens)
