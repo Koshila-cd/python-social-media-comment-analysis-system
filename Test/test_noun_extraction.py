@@ -1,6 +1,7 @@
 import unittest
 import noun_extraction
 
+
 class TestStringMethods(unittest.TestCase):
 
     def test_nouns(self):

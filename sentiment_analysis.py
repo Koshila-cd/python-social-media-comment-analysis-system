@@ -15,25 +15,25 @@ nr = pd.read_csv('data/neg-reviews-youtube.csv', index_col=0)
 stopwords_english = stopwords.words('english')
 
 
-# def analyze_sentiment(comment):
-#     blob1 = TextBlob(comment)
-#     p = blob1.sentiment.polarity
-#     print("score: ", p)
-#     polarity = sentiment_category(p)
-#     print("category: ", polarity)
-#     return polarity
-#
-#
-# def sentiment_category(score):
-#     category = 'x'
-#     print("score", score)
-#     if score > 0.0:
-#         category = 'p'
-#
-#     if score < 0.0:
-#         category = 'n'
-#
-#     return category
+def analyze_sentiment(comment):
+    blob1 = TextBlob(comment)
+    p = blob1.sentiment.polarity
+    print("score: ", p)
+    polarity = sentiment_category(p)
+    print("category: ", polarity)
+    return polarity
+
+
+def sentiment_category(score):
+    category = 'x'
+    print("score", score)
+    if score > 0.0:
+        category = 'p'
+
+    if score < 0.0:
+        category = 'n'
+
+    return category
 
 
 # clean words, i.e. remove stopwords and punctuation
@@ -85,7 +85,7 @@ def stopwords_english_for_bigrams():
 
 
 def sentiment_analysis(text):
-    # cleaning words is find for unigrams
+    # cleaning words is found for unigrams
     # but this can omit important words for bigrams
     # for example, stopwords like very, over, under, so, etc. are important for bigrams
     # we create a new stopwords list specifically for bigrams by omitting such important words
@@ -133,12 +133,12 @@ def sentiment_analysis(text):
     test_set = pos_reviews_set[:200] + neg_reviews_set[:200]
     train_set = pos_reviews_set[200:] + neg_reviews_set[200:]
 
-    print(len(test_set), len(train_set))  # Output: (400, 1600)
+    # print(len(test_set), len(train_set))  # Output: (400, 1600)
 
     classifier = NaiveBayesClassifier.train(train_set)
 
-    accuracy = classify.accuracy(classifier, test_set)
-    print(accuracy)  # Output: 0.8325
+    # accuracy = classify.accuracy(classifier, test_set)
+    # print(accuracy)  # Output: 0.8325
 
     custom_review_tokens = word_tokenize(text)
     custom_review_set = bag_of_all_words(custom_review_tokens)
