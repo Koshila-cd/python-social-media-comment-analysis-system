@@ -112,7 +112,7 @@ def relevance_check(map):
 
 def toService(comment, description, title):
     onto.MovieNames(title)
-    dner = named_entity_recognition.recognition(youTubeDescription)
+    dner = named_entity_recognition.recognition(description)
     if len(dner) > 0:
         for n in dner:
             onto.MovieKeywords(n.casefold())

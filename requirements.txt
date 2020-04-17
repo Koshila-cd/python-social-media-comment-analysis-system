@@ -4,3 +4,14 @@ pandas
 owlready2
 textblob
 nltk
+
+sudo pip3 install textblob
+sudo pip3 install owlready2
+sudo pip3 install pandas
+
+python3
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
