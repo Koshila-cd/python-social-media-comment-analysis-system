@@ -636,10 +636,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieNames>
 
-<MovieNames rdf:about="/link">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieNames>
-
 <MovieNames rdf:about="/half moon street">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieNames>
@@ -27064,10 +27060,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
-<MovieKeywords rdf:about="/hey">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
 <MovieKeywords rdf:about="/sheldon">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
@@ -27313,10 +27305,6 @@
 </MovieKeywords>
 
 <MovieKeywords rdf:about="/shit">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</MovieKeywords>
-
-<MovieKeywords rdf:about="/im">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </MovieKeywords>
 
