@@ -7,6 +7,7 @@ import named_entity_recognition
 from textblob import TextBlob
 
 onto = get_ontology("movie.owl").load()
+ontology = get_ontology("movie1.owl").load()
 
 youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
                      " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
@@ -24,7 +25,7 @@ youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Sha
 comment = "is it just me or does this movie have more teens and young adult fans then kid fans?"
 comment = "Zootopia is the best animated movie"
 
-star = "*"
+slash = "/"
 
 
 def youtube_nouns(description):
@@ -37,7 +38,7 @@ def youtube_nouns(description):
 
 
 def comment_nouns(comment):  # words with missed spellings
-    comment = TextBlob(comment).correct().__str__()
+    # comment = TextBlob(comment).correct().__str__()
     noOfWords = []
     tokens = word_tokenize(comment)
     for t in tokens:
@@ -47,7 +48,7 @@ def comment_nouns(comment):  # words with missed spellings
     nouns = []
 
     if len(noOfWords) == 1:
-        word1 = star + noOfWords[0]
+        word1 = slash + noOfWords[0]
         if onto.search(iri=word1.casefold()):
             mapped.append(noOfWords[0].casefold())
         else:
@@ -59,7 +60,7 @@ def comment_nouns(comment):  # words with missed spellings
         if len(cner) > 0:
             # Direct mapping with ontology created for searching for nouns extracted from the YouTube comment
             for n in cner:
-                n1 = star + n
+                n1 = slash + n
                 if onto.search(iri=n1):
                     mapped.append(n)
                 else:
@@ -72,17 +73,16 @@ def comment_nouns(comment):  # words with missed spellings
 
 def noun_mapping(nouns, mapped):
     for n in nouns:
-        noun = star + n[0]
-        # print("nnn", n[0])
+        noun = slash + n[0]
+        print("extracted nouns: ", noun.casefold())
         # Direct mapping with ontology created for searching for nouns extracted from the YouTube comment
         if onto.search(iri=noun.casefold()):
-            # print("cc", noun)
+            print(noun)
             mapped.append(n[0].casefold())
         else:
             # Semantic mapping
             mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
 
-    # print("mapped", mapped)
     return mapped
 
 
@@ -96,7 +96,7 @@ def semantic_mapping(word, mapped):
             synonyms.append(l.name())
 
     for synonym in set(synonyms):
-        s = star + synonym
+        s = slash + synonym
         if onto.search(iri=s):
             mapped.append(synonym)
     return mapped
@@ -104,14 +104,14 @@ def semantic_mapping(word, mapped):
 
 def relevance_check(map):
     if len(map[0]) > 0:
-        polarity = sentiment_analysis.analyze_sentiment(map[2])
+        polarity = sentiment_analysis.sentiment_analysis(map[2])
     else:
         polarity = "None"
     return polarity
 
 
 def toService(comment, description, title):
-    onto.MovieNames(title)
+    onto.MovieNames(title.casefold())
     dner = named_entity_recognition.recognition(description)
     if len(dner) > 0:
         for n in dner:
@@ -128,24 +128,24 @@ def toService(comment, description, title):
     return polarity
 
 
-# if __name__ == '__main__':
-#
-#     ######################################################################
-#     dner = named_entity_recognition.recognition(youTubeDescription)
-#     if len(dner) > 0:
-#         for n in dner:
-#             # print("dner")
-#             onto.MovieKeywords(n.casefold())
-#             onto.save(file="movie.owl", format="rdfxml")
-#
-#     youtube_nouns(youTubeDescription)
-#
-#     comment = "I liove this monie"
-#     # Z < br / > @Z
-#     corrected = TextBlob(comment).correct().__str__()
-#     # print("corrected : ", corrected)
-#     map = comment_nouns(corrected)
-#
-#     polarity = relevance_check(map)
-#     # print("polarity", polarity)
+if __name__ == '__main__':
+
+    ######################################################################
+    dner = named_entity_recognition.recognition(youTubeDescription)
+    if len(dner) > 0:
+        for n in dner:
+            # print("dner")
+            onto.MovieKeywords(n.casefold())
+            onto.save(file="movie.owl", format="rdfxml")
+
+    youtube_nouns(youTubeDescription)
+
+    comment = "this looks awesome"
+
+    corrected = TextBlob(comment).correct().__str__()
+    print("corrected : ", corrected)
+    map = comment_nouns(comment)
+
+    polarity = relevance_check(map)
+    # print("polarity", polarity)
     ######################################################################
