@@ -3,7 +3,6 @@ import pandas as pd
 import noun_extraction
 
 ontology = get_ontology("/data")
-# onto = get_ontology("movie.owl").load()
 mg = pd.read_csv('data/Movie-genres.csv', index_col=0)
 mn = pd.read_csv('data/Movie-names.csv', index_col=0)
 ms = pd.read_csv('data/Movie-stars.csv', index_col=0)
@@ -20,7 +19,7 @@ class MovieNames(Thing):
 
 
 for label, row in mn.iterrows():
-    MovieNames(label.casefold())
+    MovieNames('/'+label.casefold())
 
 
 # Movie Keywords
@@ -92,7 +91,17 @@ class MovieSingleWordReviews(Thing):
 for label, row in mswr.iterrows():
     ontology.MovieKeywords(label.casefold())
 
-# onto.save(file="movie.owl", format="rdfxml")
+ontology.save(file="movie1.owl", format="rdfxml")
+
+
+
+
+
+
+
+
+
+
 
 # print(list(onto.classes()))
 # g = 0

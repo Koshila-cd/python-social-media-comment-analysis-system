@@ -9,7 +9,7 @@ def extract_nouns(text):
     # language detection
     # lang = detect(text)
     # if lang == 'en':
-    text = TextBlob(text).correct().__str__()
+    # text = TextBlob(text).correct().__str__()
     # print("text : ", text)
     sentences = sent_tokenize(text)
 

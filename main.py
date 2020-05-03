@@ -7,7 +7,6 @@ import named_entity_recognition
 from textblob import TextBlob
 
 onto = get_ontology("movie.owl").load()
-ontology = get_ontology("movie1.owl").load()
 
 youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
                      " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
@@ -67,7 +66,7 @@ def comment_nouns(comment):  # words with missed spellings
                     mapped.__add__(noun_mapping(nouns, mapped))
         else:
             mapped.__add__(noun_mapping(nouns, mapped))
-    print("mappedmapped", mapped, nouns, comment)
+    print("mapped[]: ", mapped, nouns, comment)
     return mapped, nouns, comment
 
 
@@ -77,34 +76,35 @@ def noun_mapping(nouns, mapped):
         print("extracted nouns: ", noun.casefold())
         # Direct mapping with ontology created for searching for nouns extracted from the YouTube comment
         if onto.search(iri=noun.casefold()):
-            print(noun)
+            print("noun mapping: ", n)
             mapped.append(n[0].casefold())
         else:
             # Semantic mapping
+            print("semantic mapping ",noun)
             mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
 
     return mapped
 
 
 def semantic_mapping(word, mapped):
-    synonyms = []
+    syns = []
 
-    # finding synonyms in wordnet
+    # finding synsets in wordnet
     for syn in wordnet.synsets(word):
         for l in syn.lemmas():
-            # setting synonyms found from wordnet to array
-            synonyms.append(l.name())
+            # setting words in synsets found from wordnet to array
+            syns.append(l.name())
 
-    for synonym in set(synonyms):
-        s = slash + synonym
+    for syn1 in set(syns):
+        s = slash + syn1
         if onto.search(iri=s):
-            mapped.append(synonym)
+            mapped.append(syn1)
     return mapped
 
 
 def relevance_check(map):
     if len(map[0]) > 0:
-        polarity = sentiment_analysis.sentiment_analysis(map[2])
+        polarity = sentiment_analysis.analyze_sentiment(map[2])
     else:
         polarity = "None"
     return polarity
