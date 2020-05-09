@@ -6,11 +6,7 @@ from textblob import TextBlob
 
 
 def extract_nouns(text):
-    # language detection
-    # lang = detect(text)
-    # if lang == 'en':
-    # text = TextBlob(text).correct().__str__()
-    # print("text : ", text)
+    text = TextBlob(text).correct().__str__()
     sentences = sent_tokenize(text)
 
     # tokenize comment
@@ -53,13 +49,6 @@ def extract_nouns(text):
     return text_nouns
 
 
-# else:
-#     print("The language is, ", detect(text))
-#     sys.exit(1)
-#     return ""
-
-
 if __name__ == '__main__':
     text = "This movie is awesome. But I don't like the last part!!!"
-    # text = "Меня зовут кошила"
     extract_nouns(text)

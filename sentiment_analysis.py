@@ -8,7 +8,6 @@ from nltk.corpus import stopwords
 import string
 import pandas as pd
 import noun_extraction
-from random import shuffle
 
 pr = pd.read_csv('data/pos-reviews-youtube.csv', index_col=0)
 nr = pd.read_csv('data/neg-reviews-youtube.csv', index_col=0)
@@ -18,15 +17,12 @@ stopwords_english = stopwords.words('english')
 def analyze_sentiment(comment):
     blob1 = TextBlob(comment)
     p = blob1.sentiment.polarity
-    print("score: ", p)
     polarity = sentiment_category(p)
-    print("category: ", polarity)
     return polarity
 
 
 def sentiment_category(score):
     category = 'x'
-    print("score", score)
     if score > 0.0:
         category = 'p'
 
@@ -101,6 +97,7 @@ def sentiment_analysis(text):
         words = movie_reviews.words(fileid)
         neg_reviews.append(words)
 
+    ############################## NEW DATASETS ###########################
     for label, row in pr.iterrows():
         print(label)
         tokens = noun_extraction.extract_nouns(label)
@@ -111,6 +108,7 @@ def sentiment_analysis(text):
         tokens = noun_extraction.extract_nouns(label)
         for t in tokens:
             neg_reviews.append(t)
+    ############################## NEW DATASETS ###########################
     # 0.8325 0.755
     # before 0.7875 now 0.805
     # positive reviews feature set
@@ -137,8 +135,8 @@ def sentiment_analysis(text):
 
     classifier = NaiveBayesClassifier.train(train_set)
 
-    # accuracy = classify.accuracy(classifier, test_set)
-    # print(accuracy)  # Output: 0.8325
+    accuracy = classify.accuracy(classifier, test_set)
+    print(accuracy)  # Output: 0.8325
 
     custom_review_tokens = word_tokenize(text)
     custom_review_set = bag_of_all_words(custom_review_tokens)
@@ -150,7 +148,6 @@ def sentiment_analysis(text):
 
 def category(score):
     category = 'x'
-    print("score", score)
     if score == 'pos':
         category = 'p'
 

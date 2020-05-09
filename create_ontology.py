@@ -2,7 +2,10 @@ from owlready2 import *
 import pandas as pd
 import noun_extraction
 
+# initialize ontology
 ontology = get_ontology("/data")
+
+# import data
 mg = pd.read_csv('data/Movie-genres.csv', index_col=0)
 mn = pd.read_csv('data/Movie-names.csv', index_col=0)
 ms = pd.read_csv('data/Movie-stars.csv', index_col=0)
@@ -19,18 +22,7 @@ class MovieNames(Thing):
 
 
 for label, row in mn.iterrows():
-    MovieNames('/'+label.casefold())
-
-
-# Movie Keywords
-class MovieKeywords(Thing):
-    namespace = ontology
-
-
-for label, row in mr.iterrows():
-    nouns = noun_extraction.extract_nouns(label)
-    for n in nouns:
-        MovieKeywords(n[0].casefold())
+    MovieNames('/' + label.casefold())
 
 
 # Movie Awards
@@ -83,7 +75,7 @@ for label, row in msn.iterrows():
     MovieStageNames(label.casefold())
 
 
-#Movie single word reviews
+# Movie single word reviews
 class MovieSingleWordReviews(Thing):
     namespace = ontology
 
@@ -91,21 +83,15 @@ class MovieSingleWordReviews(Thing):
 for label, row in mswr.iterrows():
     ontology.MovieKeywords(label.casefold())
 
-ontology.save(file="movie1.owl", format="rdfxml")
+
+# Movie Keywords
+class MovieKeywords(Thing):
+    namespace = ontology
 
 
+for label, row in mr.iterrows():
+    nouns = noun_extraction.extract_nouns(label)
+    for n in nouns:
+        MovieKeywords(n[0].casefold())
 
-
-
-
-
-
-
-
-
-# print(list(onto.classes()))
-# g = 0
-# for i in MovieKeywords.instances():
-#     print(i)
-#     print(g + 1)
-#     g = g + 1
+ontology.save(file="movie.owl", format="rdfxml")

@@ -10,7 +10,7 @@ def recognition(text):
     for entity in doc.ents:
         if entity.label_ == "PERSON":
             ner.append(entity.text.casefold())
-    print(ner)
+    # print(ner)
     return ner
 
 if __name__ == '__main__':

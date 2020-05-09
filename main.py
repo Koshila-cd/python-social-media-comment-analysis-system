@@ -4,25 +4,8 @@ from owlready2 import *
 from nltk.corpus import wordnet
 import sentiment_analysis
 import named_entity_recognition
-from textblob import TextBlob
 
 onto = get_ontology("movie.owl").load()
-
-youTubeDescription = "Happy Zoo Year! The new trailer for Zootopia featuring Shakira’s new single “Try Everything, is here!" \
-                     " Watch now and see the film in theatres in 3D March 4! The modern mammal metropolis of Zootopia is a city " \
-                     "like no other. Comprised of habitat neighborhoods like ritzy Sahara Square and frigid Tundratown, it’s a melting" \
-                     " pot where animals from every environment live together—a place where no matter what you are, from the biggest " \
-                     "elephant to the smallest shrew, you can be anything. But when rookie Officer Judy Hopps (voice of Ginnifer Goodwin)" \
-                     " arrives, she discovers that being the first bunny on a police force of big, tough animals isn’t so easy. Determined" \
-                     " to prove herself, she jumps at the opportunity to crack a case, even if it means partnering with a fast-talking," \
-                     " scam-artist fox, Nick Wilde (voice of Jason Bateman), to solve the mystery. Walt Disney Animation Studios’ “Zootopia,”" \
-                     " a comedy-adventure directed by Byron Howard and Rich Moore and co-directed by Jared Bush, opens in theaters on March 4," \
-                     " 2016. Like Zootopia on Facebook - https://www.facebook.com/DisneyZootopia Follow @DisneyZootopia on Twitter - " \
-                     "https://twitter.com/disneyzootopia Follow @DisneyAnimation on Instagram - https://twitter.com/disneyanimation Follow " \
-                     "Disney Animation on Tumblr - http://disneyanimation.tumblr.com/ Category Film & Animation"
-
-comment = "is it just me or does this movie have more teens and young adult fans then kid fans?"
-comment = "Zootopia is the best animated movie"
 
 slash = "/"
 
@@ -36,16 +19,17 @@ def youtube_nouns(description):
         return nouns
 
 
-def comment_nouns(comment):  # words with missed spellings
-    # comment = TextBlob(comment).correct().__str__()
+def comment_nouns(comment):
     noOfWords = []
     tokens = word_tokenize(comment)
+    # remove punctuation in tokens
     for t in tokens:
         if t.isalpha():
             noOfWords.append(t)
     mapped = []
     nouns = []
 
+    # procedure for single word comments
     if len(noOfWords) == 1:
         word1 = slash + noOfWords[0]
         if onto.search(iri=word1.casefold()):
@@ -66,21 +50,20 @@ def comment_nouns(comment):  # words with missed spellings
                     mapped.__add__(noun_mapping(nouns, mapped))
         else:
             mapped.__add__(noun_mapping(nouns, mapped))
-    print("mapped[]: ", mapped, nouns, comment)
+    print("Nouns: ", nouns)
+    print("Mapped: ", mapped)
     return mapped, nouns, comment
 
 
 def noun_mapping(nouns, mapped):
     for n in nouns:
         noun = slash + n[0]
-        print("extracted nouns: ", noun.casefold())
         # Direct mapping with ontology created for searching for nouns extracted from the YouTube comment
         if onto.search(iri=noun.casefold()):
-            print("noun mapping: ", n)
+            # print("noun mapping: ", n)
             mapped.append(n[0].casefold())
         else:
             # Semantic mapping
-            print("semantic mapping ",noun)
             mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
 
     return mapped
@@ -104,48 +87,38 @@ def semantic_mapping(word, mapped):
 
 def relevance_check(map):
     if len(map[0]) > 0:
+        # sentiment analysis
         polarity = sentiment_analysis.analyze_sentiment(map[2])
+        print("relevant comment")
     else:
         polarity = "None"
+        print("irrelevant comment")
     return polarity
 
 
 def toService(comment, description, title):
     onto.MovieNames(title.casefold())
+    # recognize named-entities in description
     dner = named_entity_recognition.recognition(description)
     if len(dner) > 0:
         for n in dner:
+            # save description details in Ontology
             onto.MovieKeywords(n.casefold())
             onto.save(file="movie.owl", format="rdfxml")
 
-    youtube_nouns(description)
-
-    corrected = TextBlob(comment).correct().__str__()
-    print("corrected : ", corrected)
-    map = comment_nouns(corrected)
+    print("comment: ", comment)
+    map = comment_nouns(comment)
     polarity = relevance_check(map)
 
     return polarity
 
-
 if __name__ == '__main__':
-
     ######################################################################
-    dner = named_entity_recognition.recognition(youTubeDescription)
-    if len(dner) > 0:
-        for n in dner:
-            # print("dner")
-            onto.MovieKeywords(n.casefold())
-            onto.save(file="movie.owl", format="rdfxml")
 
-    youtube_nouns(youTubeDescription)
+    comment = "We're shaking...It's an earthquake"
 
-    comment = "this looks awesome"
-
-    corrected = TextBlob(comment).correct().__str__()
-    print("corrected : ", corrected)
     map = comment_nouns(comment)
 
     polarity = relevance_check(map)
-    # print("polarity", polarity)
+    print("polarity", polarity)
     ######################################################################
