@@ -22,11 +22,11 @@ def analyze_sentiment(comment):
 
 
 def sentiment_category(score):
-    category = 'x'
+    # category = 'x'
     if score > 0.0:
         category = 'p'
 
-    if score < 0.0:
+    if score <= 0.0:
         category = 'n'
 
     return category
