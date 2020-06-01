@@ -6,7 +6,7 @@ from textblob import TextBlob
 
 
 def extract_nouns(text):
-    text = TextBlob(text).correct().__str__()
+    # text = TextBlob(text).correct().__str__()
     sentences = sent_tokenize(text)
 
     # tokenize comment

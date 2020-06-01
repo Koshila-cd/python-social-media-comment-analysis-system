@@ -34,9 +34,9 @@ def comment_nouns(comment):
         word1 = slash + noOfWords[0]
         if onto.search(iri=word1.casefold()):
             mapped.append(noOfWords[0].casefold())
-        else:
-            # Semantic mapping
-            mapped.__add__(semantic_mapping(noOfWords[0].casefold(), mapped))
+        # else:
+        #     # Semantic mapping
+        #     mapped.__add__(semantic_mapping(noOfWords[0].casefold(), mapped))
     else:
         nouns = noun_extraction.extract_nouns(comment)
         cner = named_entity_recognition.recognition(comment)
@@ -62,9 +62,9 @@ def noun_mapping(nouns, mapped):
         if onto.search(iri=noun.casefold()):
             # print("noun mapping: ", n)
             mapped.append(n[0].casefold())
-        else:
-            # Semantic mapping
-            mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
+        # else:
+        #     # Semantic mapping
+        #     mapped.__add__(semantic_mapping(n[0].casefold(), mapped))
 
     return mapped
 
@@ -115,10 +115,9 @@ def toService(comment, description, title):
 if __name__ == '__main__':
     ######################################################################
 
-    comment = "We're shaking...It's an earthquake"
+    comment = "this movie is awesome"
 
     map = comment_nouns(comment)
 
     polarity = relevance_check(map)
-    print("polarity", polarity)
     ######################################################################

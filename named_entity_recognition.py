@@ -1,6 +1,6 @@
 import spacy
 
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_sm') # pre-trained statistical models for English
 
 
 # ner.append(ent.text, ent.start_char, ent.end_char, ent.label_)
